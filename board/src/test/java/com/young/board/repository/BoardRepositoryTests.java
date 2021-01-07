@@ -2,6 +2,7 @@ package com.young.board.repository;
 
 import com.young.board.entity.Board;
 import com.young.board.entity.User;
+import net.bytebuddy.TypeCache;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -82,5 +83,17 @@ public class BoardRepositoryTests {
         Object[] arr = (Object[])result;
 
         System.out.println(Arrays.toString(arr));
+    }
+
+    @Test
+    public void testSearch1() {
+        boardRepository.search1();
+    }
+
+    @Test
+    public void testSearchPage() {
+        Pageable pageable = PageRequest.of(0, 10,
+                Sort.by("bno").descending().and(Sort.by("title").ascending()));
+        Page<Object[]> result = boardRepository.searchPage("t", "1", pageable);
     }
 }
