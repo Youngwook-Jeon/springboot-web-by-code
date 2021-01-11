@@ -18,7 +18,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     // MySQL에서 ONLY_FULL_GROUP_BY 모드를 해제하기 위해 db url에서 sessionVariables=sql_mode='' 추가함
     // 이미지를 1개로 줄여서 처리
-    @Query(value = "select m, mi, avg(coalesce(r.grade, 0)), count(distinct r) from Movie m " +
+    @Query(value = "select m, mi, avg(coalesce(r.grade, 0)), count(r) from Movie m " +
             "left outer join MovieImage mi on mi.movie = m " +
             "left outer join Review r on r.movie = m group by m")
     Page<Object[]> getListPage(Pageable pageable);
