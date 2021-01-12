@@ -26,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin(); // 인가/인증에 문제시 로그인 화면
         http.csrf().disable();
-        http.logout();
     }
 
     // AuthenticationManager 설정을 쉽게 처리할 수 있도록 해줌
