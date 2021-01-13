@@ -1,5 +1,6 @@
 package com.young.club.config;
 
+import com.young.club.security.handler.ClubLoginSuccessHandler;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin(); // 인가/인증에 문제시 로그인 화면
         http.csrf().disable();
+
+        http.oauth2Login().successHandler(successHandler());
+    }
+
+    @Bean
+    public ClubLoginSuccessHandler successHandler() {
+        return new ClubLoginSuccessHandler(passwordEncoder());
     }
 
     // AuthenticationManager 설정을 쉽게 처리할 수 있도록 해줌
